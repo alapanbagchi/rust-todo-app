@@ -2,41 +2,42 @@ use crate::command::Command;
 
 pub fn parse_args(args: Vec<String>) -> Result<Command, String> {
     if args.is_empty() {
-        return Err("No command provided".into());
+        return Err(String::from("Please provide a valid commmand"));
     }
-
-    let command = args[0].as_str();
+    let command = args[0].as_str().trim();
 
     match command {
         "add" => {
             if args.len() < 2 {
-                return Err("Missing task title".into());
+                return Err(String::from("The title of the task is missing"));
             }
 
-            Ok(Command::Add {
-                title: args[1].clone(),
-            })
+            let title = args[1..].join(" ");
+            Ok(Command::Add { title })
         }
         "list" => Ok(Command::List),
-
         "done" => {
             if args.len() < 2 {
-                return Err("Missing task ID".into());
+                return Err(String::from("The id of the task is missing"));
             }
 
-            let id = args[1].parse::<u32>().map_err(|_| "Invalid ID")?;
+            let id = args[1]
+                .parse::<u32>()
+                .map_err(|_| String::from("Invalid task id"))?;
+
             Ok(Command::Done { id })
         }
         "delete" => {
             if args.len() < 2 {
-                return Err("Missing task ID".into());
+                return Err(String::from("The id of the task is missing"));
             }
 
-            let id = args[1].parse::<u32>().map_err(|_| "Invalid ID")?;
+            let id = args[1]
+                .parse::<u32>()
+                .map_err(|_| String::from("Invalid task id"))?;
 
             Ok(Command::Delete { id })
         }
-
-        _ => Err("Unknown Command".into()),
+        _ => Err(String::from("Please provide a valid command")),
     }
 }
