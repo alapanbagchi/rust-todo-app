@@ -18,4 +18,18 @@ impl TaskManager {
         };
         self.tasks.push(task);
     }
+    pub fn list_tasks(&self) {
+        if self.tasks.is_empty() {
+            println!("No tasks found");
+            return;
+        }
+        for (idx, task) in self.tasks.iter().enumerate() {
+            let status = if task.completed {
+                "Completed"
+            } else {
+                "Pending"
+            };
+            println!("[{}] {} - {}", task.id, task.title, status);
+        }
+    }
 }
