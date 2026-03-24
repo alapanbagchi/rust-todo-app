@@ -1,3 +1,9 @@
 pub struct TaskManager {
-    pub tasks: Vec<Task>,
+    tasks: Vec<Task>,
+}
+
+impl TaskManager {
+    pub fn new() -> Self {
+        Self { tasks: Vec::new() }
+    }
 }
