@@ -1,6 +1,7 @@
 mod command;
+mod manager;
 mod parser;
-
+mod tasks;
 use std::env;
 
 use crate::parser::parse_args;

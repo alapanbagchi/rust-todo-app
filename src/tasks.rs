@@ -1,5 +1,7 @@
+use uuid::Uuid;
+
 pub struct Task {
-    pub id: u32,
+    pub id: Uuid,
     pub title: String,
     pub completed: bool,
 }
