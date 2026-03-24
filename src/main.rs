@@ -2,7 +2,7 @@ mod command;
 mod manager;
 mod parser;
 mod tasks;
-use std::env;
+use std::{env, task};
 
 use crate::{manager::TaskManager, parser::parse_args};
 
@@ -17,6 +17,10 @@ fn main() {
             command::Command::Add { title } => {
                 task_manager.add_task(&title);
                 println!("Task successfully added!")
+            }
+            command::Command::Done { id } => {
+                task_manager.task_done(&id);
+                println!("Task marked as done!");
             }
             _ => eprintln!("ERROR: Command not implemented yet"),
         },

@@ -1,3 +1,5 @@
+use std::process::id;
+
 use uuid::Uuid;
 
 use crate::tasks::Task;
@@ -30,6 +32,25 @@ impl TaskManager {
                 "Pending"
             };
             println!("[{}] {} - {}", task.id, task.title, status);
+        }
+    }
+    pub fn task_done(&mut self, id: &str) {
+        let task_id = match Uuid::parse_str(id) {
+            Ok(id) => id,
+            Err(_) => {
+                eprintln!("Wrong task id");
+                return;
+            }
+        };
+
+        match self.tasks.iter_mut().find(|t| t.id == task_id) {
+            Some(task) => {
+                task.completed = true;
+            }
+            None => {
+                eprintln!("Wrong task id");
+                return;
+            }
         }
     }
 }

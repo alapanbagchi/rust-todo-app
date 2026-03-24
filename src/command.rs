@@ -16,8 +16,8 @@ pub enum Command {
     List,
 
     /// Mark a task as completed using its unique ID.
-    Done { id: u32 },
+    Done { id: String },
 
     /// Delete a task by its unique ID.
-    Delete { id: u32 },
+    Delete { id: String },
 }

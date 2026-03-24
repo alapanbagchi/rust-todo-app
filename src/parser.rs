@@ -1,3 +1,5 @@
+use clap::builder::Str;
+
 use crate::command::Command;
 
 /// Parses CLI arguments into a `Command`.
@@ -32,9 +34,7 @@ pub fn parse_args(args: Vec<String>) -> Result<Command, String> {
                 return Err(String::from("The id of the task is missing"));
             }
 
-            let id = args[1]
-                .parse::<u32>()
-                .map_err(|_| String::from("Invalid task id"))?;
+            let id = args[1].to_string();
 
             Ok(Command::Done { id })
         }
@@ -43,9 +43,7 @@ pub fn parse_args(args: Vec<String>) -> Result<Command, String> {
                 return Err(String::from("The id of the task is missing"));
             }
 
-            let id = args[1]
-                .parse::<u32>()
-                .map_err(|_| String::from("Invalid task id"))?;
+            let id = args[1].to_string();
 
             Ok(Command::Delete { id })
         }
