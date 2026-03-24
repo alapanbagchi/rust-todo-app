@@ -22,6 +22,10 @@ fn main() {
                 task_manager.task_done(&id);
                 println!("Task marked as done!");
             }
+            command::Command::Delete { id } => {
+                task_manager.task_delete(&id);
+                println!("Task deleted!");
+            }
             _ => eprintln!("ERROR: Command not implemented yet"),
         },
         Err(err) => {

@@ -1,5 +1,3 @@
-use std::process::id;
-
 use uuid::Uuid;
 
 use crate::tasks::Task;
@@ -25,7 +23,7 @@ impl TaskManager {
             println!("No tasks found");
             return;
         }
-        for (idx, task) in self.tasks.iter().enumerate() {
+        for (task) in self.tasks.iter().enumerate() {
             let status = if task.completed {
                 "Completed"
             } else {
@@ -51,6 +49,22 @@ impl TaskManager {
                 eprintln!("Wrong task id");
                 return;
             }
+        }
+    }
+    pub fn task_delete(&mut self, id: &str) {
+        let task_id = match Uuid::parse_str(id) {
+            Ok(id) => id,
+            Err(_) => {
+                eprintln!("Wrong task id");
+                return;
+            }
+        };
+
+        if let Some(index) = self.tasks.iter().position(|task| task.id == task_id) {
+            self.tasks.remove(index);
+        } else {
+            eprintln!("Could not remove tasks");
+            return;
         }
     }
 }
