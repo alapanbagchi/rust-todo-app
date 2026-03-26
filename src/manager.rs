@@ -23,7 +23,7 @@ impl TaskManager {
             println!("No tasks found");
             return;
         }
-        for (task) in self.tasks.iter().enumerate() {
+        for task in self.tasks.iter() {
             let status = if task.completed {
                 "Completed"
             } else {
