@@ -1,3 +1,5 @@
+use std::fs;
+
 use uuid::Uuid;
 
 use crate::tasks::Task;
@@ -7,8 +9,12 @@ pub struct TaskManager {
 }
 
 impl TaskManager {
-    pub fn new() -> Self {
-        Self { tasks: Vec::new() }
+    pub fn new(tasks: Vec<Task>) -> Self {
+        Self { tasks }
+    }
+    fn save(&mut self) {
+        let task_json = serde_json::to_string_pretty(&self.tasks).expect("Failed to serialize");
+        fs::write("./src/tasks.json", task_json).expect("Error saving tasks to file");
     }
     pub fn add_task(&mut self, title: &str) {
         let task = Task {
@@ -17,6 +23,7 @@ impl TaskManager {
             completed: false,
         };
         self.tasks.push(task);
+        self.save();
     }
     pub fn list_tasks(&self) {
         if self.tasks.is_empty() {
@@ -50,6 +57,7 @@ impl TaskManager {
                 return;
             }
         }
+        self.save();
     }
     pub fn task_delete(&mut self, id: &str) {
         let task_id = match Uuid::parse_str(id) {
@@ -66,5 +74,6 @@ impl TaskManager {
             eprintln!("Could not remove tasks");
             return;
         }
+        self.save();
     }
 }

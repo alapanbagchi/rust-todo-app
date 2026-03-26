@@ -288,6 +288,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b5b646652bf6661599e1da8901b3b9522896f01e736bad5f723fe7a3a27f899d"
 
 [[package]]
+name = "list"
+version = "0.1.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "522d1a07016c162161bda4e44a87471282655e828ee613403529a9023e431408"
+
+[[package]]
 name = "log"
 version = "0.4.29"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -468,8 +474,10 @@ dependencies = [
  "anyhow",
  "clap",
  "env_logger",
+ "list",
  "log",
  "serde",
+ "serde_json",
  "uuid",
 ]
 

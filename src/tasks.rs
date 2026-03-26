@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "PascalCase")]
 pub struct Task {
     #[serde(rename = "ID")]
